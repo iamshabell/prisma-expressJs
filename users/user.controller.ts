@@ -40,6 +40,7 @@ export const updateAuthor =  async (request: Request, response: Response) => {
     const { id} = request.params
     const {editorId, ...authorDTO} = request.body
     const updatedAuthor = await usersService.updateUser(Number(id), {...authorDTO, editor:{connect: {id:editorId}}})
+    return response.json(updatedAuthor)
 };
 export const updateUser = (request: Request, response: Response) => {};
 export const deleteUser = (request: Request, response: Response) => {};

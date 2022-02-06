@@ -37,4 +37,14 @@ model Book{
 	description String
 	author User @relation(fields: [authorId], references: [id])
 	authorId Int
+	categories Category[]
+}
+
+model Category{
+	id Int @id @default(autoincrement())
+	name String
+	books Book[]
+	parentCategoryId Int?
+	parentCategory Category? @relation("ParentSubCategories", fields: [parentCategoryId], references: [id]) 
+	subCategories Category[] @relation("ParentSubCategories")
 }

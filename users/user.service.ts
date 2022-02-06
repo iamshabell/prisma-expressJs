@@ -10,7 +10,7 @@ export const createAddress = (addressDTO: any) => {
 };
 export const getUsers = () => {
     
-    return prisma.user.findMany({include: {address: true, author: true,editor: true}}); 
+    return prisma.user.findMany({include: {address: true, author: true,editor: true, authors: true, puplishers: true}}); 
 }
 export const getAddresses = () => {
     
@@ -21,6 +21,6 @@ export const getOneUser = (id: number) => {
     return prisma.user.findUnique({where: {id: id}})
 };
 export const updateUser = (id: number,userDTO: any) => {
-    return prisma.user.update({data: userDTO, where: {id},include:{editor:true, author:true}})
+    return prisma.user.update({data: userDTO, where: {id},include:{editor:true, author:true, authors:true,}})
 };
 export const deleteUser = (id: string) => {};

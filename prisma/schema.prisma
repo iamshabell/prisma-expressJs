@@ -20,6 +20,8 @@ model User{
 	editorId Int?
 	editor User? @relation("AuthorEditor",fields: [editorId], references: [id])
 	author User? @relation("AuthorEditor")
+	puplishers User[] @relation("AuthorPublisher")
+	authors User[] @relation("AuthorPublisher")
 }
 
 model Address{

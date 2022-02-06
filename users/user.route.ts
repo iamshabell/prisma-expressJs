@@ -7,6 +7,7 @@ import {
   getAddresses,
   createAddress,
   updateAuthor,
+  updatePublisher,
 } from "./user.controller";
 import { Router } from "express";
 
@@ -25,5 +26,6 @@ router.get("/:id", getOneUser);
 router.put("/:id", updateUser);
 
 router.put("/authors/:id", updateAuthor);
+router.put("/publishers/:id", updatePublisher);
 
 router.delete("/:id", deleteUser);

@@ -1,7 +1,45 @@
-import { Response, Request } from "express";
+import { create } from "domain";
+import { Response, Request,  } from "express";
 
-export const createUser = (request: Request, response: Response) => {};
-export const getUsers = (request: Request, response: Response) => {};
-export const getOneUser = (request: Request, response: Response) => {};
+import * as usersService from './user.service'
+
+export const createUser = async (request: Request, response: Response) => {
+    const {address, ...userDTO} = request.body
+
+    // const newUser = await usersService.createUser(request.body)
+    const newUser = await usersService.createUser({...userDTO, address: {create:address}})
+    console.log(newUser);
+
+    return response.json(newUser)
+    
+};
+export const createAddress = async (request: Request, response: Response) => {
+
+    const newAddress = await usersService.createAddress(request.body)
+
+    console.log(newAddress);
+
+    return response.json(newAddress)
+    
+};
+export const getUsers = async (request: Request, response: Response) => {
+
+    const users = await usersService.getUsers()
+    return response.json(users)
+};
+export const getAddresses = async (request: Request, response: Response) => {
+
+    const addresses = await usersService.getAddresses()
+    return response.json(addresses)
+};
+export const getOneUser = async(request: Request, response: Response) => {
+
+};
+
+export const updateAuthor =  async (request: Request, response: Response) => {
+    const { id} = request.params
+    const {editorId, ...authorDTO} = request.body
+    const updatedAuthor = await usersService.updateUser(Number(id), {...authorDTO, editor:{connect: {id:editorId}}})
+};
 export const updateUser = (request: Request, response: Response) => {};
 export const deleteUser = (request: Request, response: Response) => {};
